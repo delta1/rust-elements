@@ -95,14 +95,14 @@ pub struct Output {
     pub witness_script: Option<Script>,
     /// A map from public keys needed to spend this output to their
     /// corresponding master key fingerprints and derivation paths.
-    #[cfg_attr(feature = "serde", serde(with = "::serde_utils::btreemap_as_seq"))]
+    #[cfg_attr(feature = "serde", serde(with = "crate::serde_utils::btreemap_as_seq"))]
     pub bip32_derivation: BTreeMap<PublicKey, KeySource>,
     /// The internal pubkey
     pub tap_internal_key: Option<bitcoin::XOnlyPublicKey>,
     /// Taproot Output tree
     pub tap_tree: Option<TapTree>,
     /// Map of tap root x only keys to origin info and leaf hashes contained in it
-    #[cfg_attr(feature = "serde", serde(with = "::serde_utils::btreemap_as_seq"))]
+    #[cfg_attr(feature = "serde", serde(with = "crate::serde_utils::btreemap_as_seq"))]
     pub tap_key_origins: BTreeMap<bitcoin::XOnlyPublicKey, (Vec<TapLeafHash>, KeySource)>,
     /// (PSET) The explicit amount of the output
     pub amount: Option<u64>,
@@ -131,10 +131,10 @@ pub struct Output {
     pub blind_asset_proof: Option<Box<SurjectionProof>>,
     /// Pset
     /// Other fields
-    #[cfg_attr(feature = "serde", serde(with = "::serde_utils::btreemap_as_seq_byte_values"))]
+    #[cfg_attr(feature = "serde", serde(with = "crate::serde_utils::btreemap_as_seq_byte_values"))]
     pub proprietary: BTreeMap<raw::ProprietaryKey, Vec<u8>>,
     /// Unknown key-value pairs for this output.
-    #[cfg_attr(feature = "serde", serde(with = "::serde_utils::btreemap_as_seq_byte_values"))]
+    #[cfg_attr(feature = "serde", serde(with = "crate::serde_utils::btreemap_as_seq_byte_values"))]
     pub unknown: BTreeMap<raw::Key, Vec<u8>>,
 }
 

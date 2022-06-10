@@ -42,7 +42,7 @@ macro_rules! serde_struct_impl {
             where
                 D: $crate::serde::de::Deserializer<'de>,
             {
-                use $crate::std::fmt::{self, Formatter};
+                use std::fmt::{self, Formatter};
                 use $crate::serde::de::IgnoredAny;
 
                 #[allow(non_camel_case_types)]
