@@ -15,24 +15,24 @@
 use std::fmt;
 use std::{cmp, collections::btree_map::{BTreeMap, Entry}, io, str::FromStr};
 
-use schnorr;
-use taproot::{ControlBlock, LeafVersion, TapLeafHash, TapBranchHash};
+use crate::schnorr;
+use crate::taproot::{ControlBlock, LeafVersion, TapLeafHash, TapBranchHash};
 
-use {Script, AssetIssuance, EcdsaSigHashType, Transaction, Txid, TxOut, TxIn, BlockHash};
-use {SchnorrSigHashType, transaction::SighashTypeParseError};
-use encode::{self, Decodable};
-use confidential;
+use crate::{Script, AssetIssuance, EcdsaSigHashType, Transaction, Txid, TxOut, TxIn, BlockHash};
+use crate::{SchnorrSigHashType, transaction::SighashTypeParseError};
+use crate::encode::{self, Decodable};
+use crate::confidential;
 use bitcoin::util::bip32::KeySource;
 use bitcoin::{self, PublicKey};
-use hashes::{self, hash160, ripemd160, sha256, sha256d};
-use pset::map::Map;
-use pset::raw;
-use pset::serialize;
-use pset::{self, Error, error};
+use crate::hashes::{self, hash160, ripemd160, sha256, sha256d};
+use crate::pset::map::Map;
+use crate::pset::raw;
+use crate::pset::serialize;
+use crate::pset::{self, Error, error};
 use secp256k1_zkp::{self, RangeProof, Tweak, ZERO_TWEAK};
 
 
-use OutPoint;
+use crate::OutPoint;
 
 /// Type: Non-Witness UTXO PSET_IN_NON_WITNESS_UTXO = 0x00
 const PSET_IN_NON_WITNESS_UTXO: u8 = 0x00;
@@ -920,7 +920,7 @@ impl Decodable for Input {
                         _ =>  rv.insert_pair(raw::Pair { key: raw_key, value: raw_value })?,
                     }
                 }
-                Err(::encode::Error::PsetError(::pset::Error::NoMorePairs)) => break,
+                Err(crate::encode::Error::PsetError(crate::pset::Error::NoMorePairs)) => break,
                 Err(e) => return Err(e),
             }
         }

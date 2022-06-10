@@ -19,10 +19,10 @@
 
 use std::{fmt, io};
 
-use encode::{self, Decodable, Encodable, ReadExt, WriteExt, serialize, deserialize, MAX_VEC_SIZE};
-use hashes::hex;
+use crate::encode::{self, Decodable, Encodable, ReadExt, WriteExt, serialize, deserialize, MAX_VEC_SIZE};
+use crate::hashes::hex;
 use super::Error;
-use VarInt;
+use crate::VarInt;
 /// A PSET key in its raw byte form.
 #[derive(Debug, PartialEq, Hash, Eq, Clone, Ord, PartialOrd)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]

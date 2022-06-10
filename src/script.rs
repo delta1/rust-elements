@@ -29,9 +29,9 @@ use std::{fmt, io, ops, str};
 
 #[cfg(feature = "serde")] use serde;
 
-use encode::{self, Decodable, Encodable};
+use crate::encode::{self, Decodable, Encodable};
 use bitcoin::hashes::{Hash, hex};
-use {opcodes, ScriptHash, WScriptHash, PubkeyHash, WPubkeyHash};
+use crate::{opcodes, ScriptHash, WScriptHash, PubkeyHash, WPubkeyHash};
 
 use bitcoin::PublicKey;
 
@@ -257,16 +257,16 @@ impl Script {
 
     /// Generates P2WPKH-type of scriptPubkey
     pub fn new_v0_wpkh(pubkey_hash: &WPubkeyHash) -> Script {
-        Script::new_witness_program(::bech32::u5::try_from_u8(0).unwrap(), &pubkey_hash.to_vec())
+        Script::new_witness_program(crate::bech32::u5::try_from_u8(0).unwrap(), &pubkey_hash.to_vec())
     }
 
     /// Generates P2WSH-type of scriptPubkey with a given hash of the redeem script
     pub fn new_v0_wsh(script_hash: &WScriptHash) -> Script {
-        Script::new_witness_program(::bech32::u5::try_from_u8(0).unwrap(), &script_hash.to_vec())
+        Script::new_witness_program(crate::bech32::u5::try_from_u8(0).unwrap(), &script_hash.to_vec())
     }
 
     /// Generates P2WSH-type of scriptPubkey with a given hash of the redeem script
-    pub fn new_witness_program(ver: ::bech32::u5, program: &[u8]) -> Script {
+    pub fn new_witness_program(ver: crate::bech32::u5, program: &[u8]) -> Script {
         let mut verop = ver.to_u8();
         assert!(verop <= 16, "incorrect witness version provided: {}", verop);
         if verop > 0 {
@@ -895,8 +895,8 @@ mod test {
     use super::*;
     use super::build_scriptint;
 
-    use encode::{deserialize, serialize};
-    use opcodes;
+    use crate::encode::{deserialize, serialize};
+    use crate::opcodes;
 
     #[test]
     fn script() {

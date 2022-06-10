@@ -15,23 +15,23 @@
 use std::{collections::BTreeMap, io};
 use std::collections::btree_map::Entry;
 
-use taproot::TapLeafHash;
-use taproot::{NodeInfo, TaprootBuilder};
+use crate::taproot::TapLeafHash;
+use crate::taproot::{NodeInfo, TaprootBuilder};
 
-use {Script, encode, TxOutWitness};
+use crate::{Script, encode, TxOutWitness};
 use bitcoin::util::bip32::KeySource;
 use bitcoin::{self, PublicKey};
-use {pset, confidential};
-use encode::Decodable;
-use pset::map::Map;
-use pset::raw;
-use pset::Error;
+use crate::{pset, confidential};
+use crate::encode::Decodable;
+use crate::pset::map::Map;
+use crate::pset::raw;
+use crate::pset::Error;
 use secp256k1_zkp::{self, Generator, RangeProof, SurjectionProof};
 
-use issuance;
+use crate::issuance;
 
-use TxOut;
-use AssetId;
+use crate::TxOut;
+use crate::AssetId;
 
 /// Type: Redeem Script PSET_OUT_REDEEM_SCRIPT = 0x00
 const PSET_OUT_REDEEM_SCRIPT: u8 = 0x00;
@@ -539,7 +539,7 @@ impl Decodable for Output {
                         _ =>  rv.insert_pair(raw::Pair { key: raw_key, value: raw_value })?,
                     }
                 }
-                Err(::encode::Error::PsetError(::pset::Error::NoMorePairs)) => break,
+                Err(crate::encode::Error::PsetError(crate::pset::Error::NoMorePairs)) => break,
                 Err(e) => return Err(e),
             }
         }
